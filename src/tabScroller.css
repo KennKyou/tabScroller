@@ -1,0 +1,53 @@
+/* tabScroller */
+.tabScroller {
+    list-style: none;
+    margin-top: 20px;
+    padding: 20px 10px;
+    border: 1px solid #aaf;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.tabScroller::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.tabScroller::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.tabScroller::-webkit-scrollbar-thumb:hover {
+    background-color: transparent;
+}
+
+.tabScroller::-webkit-scrollbar {
+    background-color: transparent;
+    display: none;
+}
+
+/* scroller-item */
+.scroller-item .transition-none {
+    transition: unset;
+}
+
+.scroller-item button {
+    color: black;
+    background-color: transparent;
+    border: 1px solid black;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    min-width: 120px;
+    padding: 10px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.scroller-item.scroller-item-active button {
+    color: white;
+    background-color: black;
+    font-weight: bold;
+}
