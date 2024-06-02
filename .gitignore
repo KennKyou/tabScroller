@@ -1,4 +1,5 @@
 # 檔案名稱 .gitignore
 
+.DS_Store
 bmc-button.png
 favicon.ico
