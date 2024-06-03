@@ -209,4 +209,8 @@ Additionally, if you have enabled the `clickToActive` or `clickToScroll` feature
 The `tabScroller` class offers a flexible and feature-rich solution for implementing horizontal tab scrolling on web pages. With simple configuration and method calls, developers can easily add this interactive tab scrolling feature to their websites.
 
 ---
+
+>如果這功能有幫助到你/妳的話，可以請不吝請我喝杯咖啡☕
+If this feature has been helpful to you, please don't hesitate to buy me a coffee☕
+
 [<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="150"/>](https://www.buymeacoffee.com/KenKyou)
