@@ -1,4 +1,4 @@
-# 🎛️ tabScroller
+# tabScroller
 
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/KennKyou/tabScroller)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
@@ -8,20 +8,20 @@
 
 **A modern JavaScript horizontal scrolling tabs component with drag scrolling, click switching, and responsive design.**
 
-## ✨ 特色功能 | Features
+## 特色功能 | Features
 
-- 🎯 **輕量級** - 純 JavaScript，無依賴，壓縮後僅 ~3KB
-- 🎪 **多種互動** - 支援拖拽滾動、點擊切換、自動滾動
-- 📱 **響應式設計** - 支援斷點配置，適應不同屏幕尺寸
-- 🛡️ **TypeScript 友好** - 完整的 JSDoc 類型註解
-- 🎨 **高度自定義** - 靈活的 CSS 和配置選項
-- ⚡ **性能優化** - 防抖處理、事件優化、內存管理
-- 🧪 **測試完整** - 30+ 測試案例，確保品質
-- 🌐 **瀏覽器相容** - Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
+- **輕量級** - 純 JavaScript，無依賴
+- **多種互動** - 支援拖拽滾動、點擊切換、自動滾動
+- **響應式設計** - 支援斷點配置，適應不同螢幕尺寸
+- **TypeScript 友好** - 完整的 JSDoc 類型註解
+- **高度自定義** - 靈活的 CSS 和配置選項
+- **性能優化** - 防抖處理、事件優化、內存管理
+- **測試完整** - 30+ 測試案例，確保品質
+- **瀏覽器相容** - Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
 
-## 🚀 快速開始 | Quick Start
+## 快速開始 | Quick Start
 
-### 📦 安裝 | Installation
+### 安裝 | Installation
 
 ```bash
 # 使用 npm
@@ -31,29 +31,29 @@ npm install tab-scroller
 yarn add tab-scroller
 
 # 或直接下載文件
-wget https://github.com/KennKyou/tabScroller/releases/download/v2.0.0/tabScroller.min.js
+wget https://github.com/KennKyou/tabScroller
 ```
 
-### 🏗️ HTML 結構 | HTML Structure
+### HTML 結構 | HTML Structure
 
 ```html
 <ul class="my-tabs">
   <li class="scroller-item scroller-item-active">
-    <button type="button">首頁</button>
+    <button type="button">Home</button>
   </li>
   <li class="scroller-item">
-    <button type="button">關於我們</button>
+    <button type="button">About</button>
   </li>
   <li class="scroller-item">
-    <button type="button">產品服務</button>
+    <button type="button">Service</button>
   </li>
   <li class="scroller-item">
-    <button type="button">聯絡我們</button>
+    <button type="button">Contact</button>
   </li>
 </ul>
 ```
 
-### 🎨 CSS 樣式 | CSS Styles
+### CSS 樣式 | CSS Styles
 
 ```css
 .my-tabs {
@@ -74,7 +74,7 @@ wget https://github.com/KennKyou/tabScroller/releases/download/v2.0.0/tabScrolle
 }
 ```
 
-### 💻 JavaScript 使用 | JavaScript Usage
+### JavaScript 使用 | JavaScript Usage
 
 #### ES6 模組 (推薦)
 ```javascript
@@ -107,7 +107,7 @@ const tabs = new tabScroller('.my-tabs', {
 </script>
 ```
 
-## ⚙️ 配置選項 | Configuration
+## 配置選項 | Configuration
 
 | 選項 | 類型 | 預設值 | 說明 |
 |------|------|--------|------|
@@ -116,7 +116,7 @@ const tabs = new tabScroller('.my-tabs', {
 | `clickToScroll` | `boolean` | `false` | 啟用點擊自動滾動 |
 | `breakpoints` | `object` | `{}` | 響應式斷點配置 |
 
-### 📱 響應式配置範例
+### 響應式配置範例
 ```javascript
 const tabs = new tabScroller('.my-tabs', {
   spaceBetween: 10,
@@ -137,7 +137,7 @@ const tabs = new tabScroller('.my-tabs', {
 });
 ```
 
-## 🎪 事件處理 | Event Handling
+## 事件處理 | Event Handling
 
 tabScroller 2.0 新增了自定義事件系統：
 
@@ -157,7 +157,7 @@ container.addEventListener('tabScrollerSlideChange', (e) => {
 });
 ```
 
-## 🛠️ API 方法 | API Methods
+## API 方法 | API Methods
 
 ```javascript
 const tabs = new tabScroller('.my-tabs');
@@ -166,7 +166,7 @@ const tabs = new tabScroller('.my-tabs');
 tabs.destroy();
 ```
 
-## 🎨 進階自定義 | Advanced Customization
+## 進階自定義 | Advanced Customization
 
 ### CSS 自定義樣式
 ```css
@@ -201,9 +201,9 @@ tabs.destroy();
 }
 ```
 
-## 📱 使用案例 | Use Cases
+## 使用案例 | Use Cases
 
-### 🏷️ 分類標籤
+### 分類標籤
 ```javascript
 const categoryTabs = new tabScroller('.category-tabs', {
   spaceBetween: 12,
@@ -212,7 +212,7 @@ const categoryTabs = new tabScroller('.category-tabs', {
 });
 ```
 
-### 📅 時間軸導航
+### 時間軸導航
 ```javascript
 const timelineTabs = new tabScroller('.timeline-nav', {
   spaceBetween: 20,
@@ -223,7 +223,7 @@ const timelineTabs = new tabScroller('.timeline-nav', {
 });
 ```
 
-### 🎯 產品過濾器
+### 產品過濾器
 ```javascript
 const filterTabs = new tabScroller('.product-filters', {
   spaceBetween: 8,
@@ -232,7 +232,7 @@ const filterTabs = new tabScroller('.product-filters', {
 });
 ```
 
-## 🧪 開發和測試 | Development
+## 開發和測試 | Development
 
 ```bash
 # 安裝依賴
@@ -251,7 +251,7 @@ npm run lint
 npm run build
 ```
 
-## 📊 瀏覽器支援 | Browser Support
+## 瀏覽器支援 | Browser Support
 
 | 瀏覽器 | 版本 |
 |--------|------|
@@ -260,46 +260,18 @@ npm run build
 | Safari | 12+ |
 | Edge | 79+ |
 
-## 🔄 更新日誌 | Changelog
+## 更新日誌 | Changelog
 
 查看 [CHANGELOG.md](./CHANGELOG.md) 了解版本更新詳情。
 
-### 🆕 2.0.0 主要更新
-- ✨ 新增自定義事件系統
-- 🛡️ 強化錯誤處理和參數驗證
-- 🧹 新增 `destroy()` 方法進行資源清理
-- ⚡ 性能優化：防抖處理、內存管理
-- 📚 完整的 JSDoc 文檔和 TypeScript 支援
-- 🧪 完整的測試覆蓋（30+ 測試案例）
+### 2.0.0 主要更新
+- 新增自定義事件系統
+- 強化錯誤處理和參數驗證
+- 新增 `destroy()` 方法進行資源清理
+- 性能優化：防抖處理、內存管理
+- 完整的 JSDoc 文檔和 TypeScript 支援
+- 完整的測試覆蓋（30+ 測試案例）
 
-## 🤝 貢獻 | Contributing
-
-歡迎提交 Issue 和 Pull Request！
-
-1. Fork 此專案
-2. 創建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
-
-## 📄 授權 | License
+## 授權 | License
 
 此專案使用 [MIT](./LICENSE) 授權條款。
-
-## ☕ 支持作者 | Support
-
-如果這個專案對你有幫助，歡迎請我喝杯咖啡 ☕
-
-**If this project helps you, please consider buying me a coffee ☕**
-
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/KenKyou)
-
----
-
-<div align="center">
-
-**Made with ❤️ by [KennKyou](https://github.com/KennKyou)**
-
-[📖 文檔](https://github.com/KennKyou/tabScroller) • [🐛 回報問題](https://github.com/KennKyou/tabScroller/issues) • [💡 功能建議](https://github.com/KennKyou/tabScroller/issues)
-
-</div>
