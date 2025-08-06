@@ -1,0 +1,48 @@
+# 開發文件
+.git/
+.github/
+.vscode/
+.idea/
+node_modules/
+
+# 測試和開發工具
+tests/
+coverage/
+.nyc_output
+jest.config.js
+eslint.config.js
+.eslintcache
+.prettierrc
+.prettierignore
+.editorconfig
+
+# 建置和配置文件
+postcss.config.js
+scripts/
+.nvmrc
+NPM_PUBLISH_GUIDE.md
+
+# 示範和範例
+index.html
+*.html
+
+# 日誌和臨時文件
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# 開發用的 dist 文件
+dist/tabScroller.min.js.map
+dist/tabScroller.min.css.map
+
+# 只保留發布需要的文件：
+# - src/ (源代碼)
+# - dist/tabScroller.umd.js (UMD版本)
+# - dist/tabScroller.min.js (ES6壓縮版)
+# - dist/tabScroller.min.css (CSS壓縮版)
+# - README.md (文檔)
+# - LICENSE (授權)
+# - CHANGELOG.md (更新日誌)
+# - package.json (自動包含)

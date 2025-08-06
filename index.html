@@ -6,7 +6,7 @@
     <title>tabScroller</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="dist/tabScroller.css">
+    <link rel="stylesheet" href="src/tabScroller.css">
   </head>
   <style>
     * {
@@ -260,6 +260,81 @@
             </li>
           </ul>
         </div>
+
+        <!-- 新增：事件監聽示範 -->
+        <div class="each-tabScroller">
+          <h5>事件監聽示範 (檢查控制台)</h5>
+          <h5>Event Listening Demo (Check Console)</h5>
+          <ul class="tabScroller tabScroller6">
+            <li class="scroller-item scroller-item-active">
+              <button type="button">首頁</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">產品介紹</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">服務項目</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">關於我們</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">客戶案例</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">聯絡我們</button>
+            </li>
+          </ul>
+          <div id="event-log" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; font-size: 14px; min-height: 50px;">
+            <strong>事件日誌:</strong><br>
+            <span id="log-content">等待用戶操作...</span>
+          </div>
+        </div>
+
+        <!-- 新增：動態控制示範 -->
+        <div class="each-tabScroller">
+          <h5>動態控制示範</h5>
+          <h5>Dynamic Control Demo</h5>
+          <ul class="tabScroller tabScroller7">
+            <li class="scroller-item scroller-item-active">
+              <button type="button">JavaScript</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">TypeScript</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">React</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">Vue.js</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">Angular</button>
+            </li>
+            <li class="scroller-item">
+              <button type="button">Svelte</button>
+            </li>
+          </ul>
+          <div style="margin-top: 15px;">
+            <button id="destroy-btn" class="btn btn-danger btn-sm" style="margin-right: 10px;">銷毀實例</button>
+            <button id="recreate-btn" class="btn btn-success btn-sm" disabled>重新創建</button>
+            <span id="status" style="margin-left: 15px; font-weight: bold; color: #28a745;">狀態: 已初始化</span>
+          </div>
+        </div>
+
+        <!-- 新增：錯誤處理示範 -->
+        <div class="each-tabScroller">
+          <h5>錯誤處理示範</h5>
+          <h5>Error Handling Demo</h5>
+          <div style="margin-bottom: 15px;">
+            <button id="test-invalid-selector" class="btn btn-warning btn-sm" style="margin-right: 10px;">測試無效選擇器</button>
+            <button id="test-empty-container" class="btn btn-warning btn-sm">測試空容器</button>
+          </div>
+          <div id="error-log" style="padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; font-size: 14px; min-height: 50px;">
+            <strong>錯誤日誌:</strong><br>
+            <span id="error-content">點擊上方按鈕測試錯誤處理...</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -269,7 +344,9 @@
     </div>
 
     <script type="module">
-      import { tabScroller } from './dist/tabScroller.js'
+      import { tabScroller } from './src/tabScroller.js'
+      
+      // 原有的示範
       const scroller1 = new tabScroller('.tabScroller1', {
         spaceBetween: 15
       })
@@ -301,6 +378,111 @@
           }
         }
       })
+
+      // 新增：事件監聽示範
+      const scroller6 = new tabScroller('.tabScroller6', {
+        spaceBetween: 20,
+        clickToActive: true,
+        clickToScroll: true
+      })
+
+      // 事件監聽器
+      const logContent = document.getElementById('log-content')
+      const eventContainer = document.querySelector('.tabScroller6')
+
+      eventContainer.addEventListener('tabScrollerActiveChange', (e) => {
+        const message = `✅ Active Change: 切換到第 ${e.detail.activeIndex + 1} 項 "${e.detail.activeItem.textContent}"`
+        console.log(message, e.detail)
+        logContent.innerHTML = message + '<br>' + logContent.innerHTML
+      })
+
+      eventContainer.addEventListener('tabScrollerSlideChange', (e) => {
+        const message = `🎯 Slide Change: 滑動到第 ${e.detail.targetIndex + 1} 項 (scrollLeft: ${e.detail.scrollLeft}px)`
+        console.log(message, e.detail)
+        logContent.innerHTML = message + '<br>' + logContent.innerHTML
+      })
+
+      // 新增：動態控制示範
+      let scroller7 = new tabScroller('.tabScroller7', {
+        spaceBetween: 15,
+        clickToActive: true,
+        clickToScroll: true
+      })
+
+      const destroyBtn = document.getElementById('destroy-btn')
+      const recreateBtn = document.getElementById('recreate-btn')
+      const status = document.getElementById('status')
+
+      destroyBtn.addEventListener('click', () => {
+        if (scroller7) {
+          scroller7.destroy()
+          scroller7 = null
+          destroyBtn.disabled = true
+          recreateBtn.disabled = false
+          status.textContent = '狀態: 已銷毀'
+          status.style.color = '#dc3545'
+          console.log('✅ tabScroller 實例已銷毀')
+        }
+      })
+
+      recreateBtn.addEventListener('click', () => {
+        if (!scroller7) {
+          scroller7 = new tabScroller('.tabScroller7', {
+            spaceBetween: 15,
+            clickToActive: true,
+            clickToScroll: true
+          })
+          destroyBtn.disabled = false
+          recreateBtn.disabled = true
+          status.textContent = '狀態: 已重新初始化'
+          status.style.color = '#28a745'
+          console.log('✅ tabScroller 實例已重新創建')
+        }
+      })
+
+      // 新增：錯誤處理示範
+      const errorContent = document.getElementById('error-content')
+      const testInvalidBtn = document.getElementById('test-invalid-selector')
+      const testEmptyBtn = document.getElementById('test-empty-container')
+
+      testInvalidBtn.addEventListener('click', () => {
+        try {
+          new tabScroller('.non-existent-selector', {
+            spaceBetween: 15
+          })
+        } catch (error) {
+          const message = `❌ 錯誤: ${error.message}`
+          console.error(message)
+          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
+        }
+      })
+
+      testEmptyBtn.addEventListener('click', () => {
+        // 創建一個空的測試容器
+        const emptyContainer = document.createElement('div')
+        emptyContainer.className = 'empty-test-container'
+        document.body.appendChild(emptyContainer)
+
+        try {
+          new tabScroller('.empty-test-container', {
+            spaceBetween: 15
+          })
+          const message = `⚠️ 警告: 已創建空容器實例，檢查控制台查看警告訊息`
+          console.warn(message)
+          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
+        } catch (error) {
+          const message = `❌ 錯誤: ${error.message}`
+          console.error(message)
+          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
+        } finally {
+          // 清理測試容器
+          document.body.removeChild(emptyContainer)
+        }
+      })
+
+      // 頁面載入提示
+      console.log('🚀 tabScroller 示範頁面已載入')
+      console.log('💡 提示：與標籤互動以查看事件日誌')
     </script>
   </body>
 </html>
