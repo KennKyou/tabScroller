@@ -254,7 +254,7 @@ export class tabScroller {
 
   applyOptions() {
     const width = window.innerWidth;
-    let activeOptions = {...this.options};
+    let activeOptions = { ...this.options };
   
     if (this.options.breakpoints && typeof this.options.breakpoints === 'object') {
       const breakpoints = Object.keys(this.options.breakpoints)
@@ -266,7 +266,7 @@ export class tabScroller {
         if (width > breakpoints[i]) {
           const breakpointOptions = this.options.breakpoints[breakpoints[i]];
           if (breakpointOptions && typeof breakpointOptions === 'object') {
-            activeOptions = {...activeOptions, ...breakpointOptions};
+            activeOptions = { ...activeOptions, ...breakpointOptions };
           }
         }
       }
@@ -293,7 +293,7 @@ export class tabScroller {
       startX = e.pageX - this.wrap.offsetLeft;
       scrollLeft = this.wrap.scrollLeft;
       this.wrap.style.cursor = 'grabbing';
-    }
+    };
 
     this.stopDragging = (_e) => {
       mouseDown = false;
@@ -303,7 +303,7 @@ export class tabScroller {
           item.style.pointerEvents = 'auto';
         });
       }
-    }
+    };
 
     this.move = (e) => {
       if (!mouseDown) return;
@@ -318,7 +318,7 @@ export class tabScroller {
           item.style.pointerEvents = 'none';
         });
       }
-    }
+    };
 
     // 清理舊的事件監聽器
     this.wrap.removeEventListener('mousemove', this.move);
