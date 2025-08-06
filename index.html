@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tabScroller</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="src/tabScroller.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tabScroller - Modern Horizontal Scrolling Tab Component</title>
+  <meta name="description" content="A lightweight, modern JavaScript horizontal scrolling tab component with drag support, click switching, responsive breakpoints, and more.">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="src/tabScroller.css">
   <style>
     * {
       margin: 0;
@@ -16,473 +15,700 @@
     }
 
     body {
-      padding: 20px 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fafafa;
     }
 
-    .each-tabScroller {
-      margin-bottom: 30px;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-links li {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #666;
+      font-weight: 500;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #2563eb;
+    }
+
+    .btn-primary:hover {
+      background: #f8fafc;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 4rem 0;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #1f2937;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: #f8fafc;
+      transition: transform 0.3s;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .feature-card p {
+      color: #6b7280;
+    }
+
+    /* Installation Section */
+    .installation {
+      padding: 4rem 0;
+      background: #f8fafc;
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .install-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .install-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .code-block {
+      background: #1f2937;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-family: 'Courier New', monospace;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      background: #1d4ed8;
+    }
+
+    /* Demo Section */
+    .demo {
+      padding: 4rem 0;
+      background: white;
+    }
+
+    .demo-container {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 1rem;
+    }
+
+    .demo-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .demo-description {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Tab Scroller Styles */
+    .tabScroller {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      overflow-x: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 0.5rem;
+    }
+
+    .tabScroller::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroller-item {
+      flex-shrink: 0;
+    }
+
+    .scroller-item button {
+      background: white;
+      border: 2px solid #e5e7eb;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      color: #6b7280;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .scroller-item button:hover {
+      border-color: #2563eb;
+      color: #2563eb;
+    }
+
+    .scroller-item.scroller-item-active button {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: white;
+    }
+
+    .scroller-item .transition-none {
+      transition: unset !important;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1f2937;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #374151;
+      padding-top: 1rem;
+      color: #9ca3af;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 0;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        margin-bottom: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
     }
   </style>
-  <body>
-    <section class="tab-section">
-      <div class="container">
-        <div class="each-tabScroller">
-          <h5>基本滑動功能</h5>
-          <h5>Basic Scrolling Function</h5>
-          <ul class="tabScroller tabScroller1">
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">全部</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ASIAN KUNG-FU GENERATION</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SCANDAL</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ELLEGARDEN</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">サカナクション</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SHE'S</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">L'Arc~en~Ciel</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Aimer</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Pay money To my Pain</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">King Gnu</button>
-            </li>
-          </ul>
-        </div>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="container">
+      <div class="nav">
+        <a href="#" class="logo">tabScroller</a>
+        <ul class="nav-links">
+          <li><a href="https://github.com/KennKyou/tabScroller" target="_blank" rel="noreferrer noopener" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg></a></li>
+          <li><a href="https://www.npmjs.com/package/tab-scroller" target="_blank" rel="noreferrer noopener" title="npm"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 128 128"><path fill="#cb3837" d="M0 7.062C0 3.225 3.225 0 7.062 0h113.88c3.838 0 7.063 3.225 7.063 7.062v113.88c0 3.838-3.225 7.063-7.063 7.063H7.062c-3.837 0-7.062-3.225-7.062-7.063zm23.69 97.518h40.395l.05-58.532h19.494l-.05 58.581h19.543l.05-78.075l-78.075-.1l-.1 78.126z"/><path fill="#fff" d="M25.105 65.52V26.512H40.96c8.72 0 26.274.034 39.008.075l23.153.075v77.866H83.645v-58.54H64.057v58.54H25.105z"/></svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-        <div class="each-tabScroller">
-          <h5>進頁面後滑動至 active 項目</h5>
-          <h5>Scroll to Active Item on Page Entry</h5>
-          <ul class="tabScroller tabScroller2">
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">全部</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ASIAN KUNG-FU GENERATION</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item scroller-item-active">
-              <button type="button">SCANDAL</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ELLEGARDEN</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">サカナクション</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SHE'S</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">L'Arc~en~Ciel</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Aimer</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Pay money To my Pain</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">King Gnu</button>
-            </li>
-          </ul>
-        </div>
-  
-        <div class="each-tabScroller">
-          <h5>點擊項目後變更樣式</h5>
-          <h5>Change Style on Item Click</h5>
-          <ul class="tabScroller tabScroller3">
-            <!-- 每個 item -->
-            <li class="scroller-item scroller-item-active">
-              <button type="button">全部</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ASIAN KUNG-FU GENERATION</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SCANDAL</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ELLEGARDEN</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">サカナクション</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SHE'S</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">L'Arc~en~Ciel</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Aimer</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Pay money To my Pain</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">King Gnu</button>
-            </li>
-          </ul>
-        </div>
-  
-        <div class="each-tabScroller">
-          <h5>點擊項目後變更樣式並滑動到該項目</h5>
-          <h5>Change Style and Scroll to Item on Click</h5>
-          <ul class="tabScroller tabScroller4">
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">全部</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ASIAN KUNG-FU GENERATION</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SCANDAL</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item scroller-item-active">
-              <button type="button">ELLEGARDEN</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">サカナクション</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SHE'S</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">L'Arc~en~Ciel</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Aimer</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Pay money To my Pain</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">King Gnu</button>
-            </li>
-          </ul>
-        </div>
-  
-        <div class="each-tabScroller">
-          <h5>斷點設定的響應式變化</h5>
-          <h5>Responsive Changes at Breakpoints</h5>
-          <ul class="tabScroller tabScroller5">
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">全部</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item scroller-item-active">
-              <button type="button">ASIAN KUNG-FU GENERATION</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SCANDAL</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">ELLEGARDEN</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">サカナクション</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">SHE'S</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">L'Arc~en~Ciel</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Aimer</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">Pay money To my Pain</button>
-            </li>
-            <!-- 每個 item -->
-            <li class="scroller-item">
-              <button type="button">King Gnu</button>
-            </li>
-          </ul>
-        </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>tabScroller</h1>
+      <div class="cta-buttons">
+        <a href="#installation" class="btn btn-primary">
+          Install Now
+        </a>
+        <a href="#demo" class="btn btn-secondary">
+          View Demo
+        </a>
+        <a href="https://github.com/KennKyou/tabScroller" target="_blank" rel="noreferrer noopener" title="GitHub" class="btn btn-secondary">
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <!-- 新增：事件監聽示範 -->
-        <div class="each-tabScroller">
-          <h5>事件監聽示範 (檢查控制台)</h5>
-          <h5>Event Listening Demo (Check Console)</h5>
-          <ul class="tabScroller tabScroller6">
-            <li class="scroller-item scroller-item-active">
-              <button type="button">首頁</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">產品介紹</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">服務項目</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">關於我們</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">客戶案例</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">聯絡我們</button>
-            </li>
-          </ul>
-          <div id="event-log" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 4px; font-size: 14px; min-height: 50px;">
-            <strong>事件日誌:</strong><br>
-            <span id="log-content">等待用戶操作...</span>
-          </div>
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Drag Scrolling</h3>
+          <p>Support mouse drag and touch scrolling for smooth user experience</p>
         </div>
-
-        <!-- 新增：動態控制示範 -->
-        <div class="each-tabScroller">
-          <h5>動態控制示範</h5>
-          <h5>Dynamic Control Demo</h5>
-          <ul class="tabScroller tabScroller7">
-            <li class="scroller-item scroller-item-active">
-              <button type="button">JavaScript</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">TypeScript</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">React</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">Vue.js</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">Angular</button>
-            </li>
-            <li class="scroller-item">
-              <button type="button">Svelte</button>
-            </li>
-          </ul>
-          <div style="margin-top: 15px;">
-            <button id="destroy-btn" class="btn btn-danger btn-sm" style="margin-right: 10px;">銷毀實例</button>
-            <button id="recreate-btn" class="btn btn-success btn-sm" disabled>重新創建</button>
-            <span id="status" style="margin-left: 15px; font-weight: bold; color: #28a745;">狀態: 已初始化</span>
-          </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>Click Switching</h3>
+          <p>Support click tab switching with active state and auto-scroll to target position</p>
         </div>
-
-        <!-- 新增：錯誤處理示範 -->
-        <div class="each-tabScroller">
-          <h5>錯誤處理示範</h5>
-          <h5>Error Handling Demo</h5>
-          <div style="margin-bottom: 15px;">
-            <button id="test-invalid-selector" class="btn btn-warning btn-sm" style="margin-right: 10px;">測試無效選擇器</button>
-            <button id="test-empty-container" class="btn btn-warning btn-sm">測試空容器</button>
-          </div>
-          <div id="error-log" style="padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; font-size: 14px; min-height: 50px;">
-            <strong>錯誤日誌:</strong><br>
-            <span id="error-content">點擊上方按鈕測試錯誤處理...</span>
-          </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Responsive Design</h3>
+          <p>Support responsive breakpoint configuration for different screen sizes</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightweight & Efficient</h3>
+          <p>Zero dependencies, small bundle size, built with modern ES6+ syntax</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Highly Customizable</h3>
+          <p>Rich configuration options and event system for various use cases</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Easy Integration</h3>
+          <p>Support ES6 modules and UMD format, easily integrate into any project</p>
         </div>
       </div>
-    </section>
-
-    <div class="container">
-      <p class="bmc">如果這功能有幫助到你/妳的話，可以請不吝請我喝杯咖啡☕<br>If this feature has been helpful to you, please don't hesitate to buy me a coffee☕</p>
-      <a href="https://www.buymeacoffee.com/KenKyou" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 45px !important;width: 162.75px !important;" ></a>
     </div>
+  </section>
 
-    <script type="module">
-      import { tabScroller } from './src/tabScroller.js'
-      
-      // 原有的示範
-      const scroller1 = new tabScroller('.tabScroller1', {
-        spaceBetween: 15
-      })
-      const scroller2 = new tabScroller('.tabScroller2', {
-        spaceBetween: 15
-      })
-      const scroller3 = new tabScroller('.tabScroller3', {
-        spaceBetween: 15,
-        clickToActive: true
-      })
-      const scroller4 = new tabScroller('.tabScroller4', {
-        spaceBetween: 15,
-        clickToActive: true,
-        clickToScroll: true,
-      })
-      const scroller5 = new tabScroller('.tabScroller5', {
-        spaceBetween: 15,
-        clickToActive: true,
-        clickToScroll: true,
-        breakpoints: {
-          576: {
-            spaceBetween: 25,
-            clickToActive: false,
-            clickToScroll: false
-          },
-          991: {
-            spaceBetween: 50,
-            clickToActive: true
-          }
+  <!-- Installation Section -->
+  <section class="installation" id="installation">
+    <div class="container">
+      <h2 class="section-title">Installation & Usage</h2>
+      <div class="install-grid">
+        <div class="install-card">
+          <h3>📦 NPM Installation</h3>
+          <p>Recommended to install via npm for latest version and type definitions:</p>
+          <div class="code-block">npm install tab-scroller</div>
+          <button class="copy-btn" onclick="copyToClipboard('npm install tab-scroller')">Copy Command</button>
+        </div>
+
+        <div class="install-card">
+          <h3>🚀 Basic Usage</h3>
+          <p>Import as ES6 module and initialize:</p>
+          <div class="code-block">import { tabScroller } from 'tab-scroller';
+
+const tabs = new tabScroller('.my-tabs', {
+  spaceBetween: 15,
+  clickToActive: true,
+  clickToScroll: true
+});</div>
+          <button class="copy-btn" onclick="copyToClipboard('import { tabScroller } from \'tab-scroller\';\n\nconst tabs = new tabScroller(\'.my-tabs\', {\n  spaceBetween: 15,\n  clickToActive: true,\n  clickToScroll: true\n});')">Copy Code</button>
+        </div>
+
+        <div class="install-card">
+          <h3>🏗️ HTML Structure</h3>
+          <p>Follow this HTML structure pattern:</p>
+          <div class="code-block">&lt;ul class="my-tabs"&gt;
+  &lt;li class="scroller-item scroller-item-active"&gt;
+    &lt;button&gt;Home&lt;/button&gt;
+  &lt;/li&gt;
+  &lt;li class="scroller-item"&gt;
+    &lt;button&gt;Products&lt;/button&gt;
+  &lt;/li&gt;
+  &lt;li class="scroller-item"&gt;
+    &lt;button&gt;Services&lt;/button&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</div>
+          <button class="copy-btn" onclick="copyToClipboard('<ul class=&quot;my-tabs&quot;>\n  <li class=&quot;scroller-item scroller-item-active&quot;>\n    <button>Home</button>\n  </li>\n  <li class=&quot;scroller-item&quot;>\n    <button>Products</button>\n  </li>\n  <li class=&quot;scroller-item&quot;>\n    <button>Services</button>\n  </li>\n</ul>')">Copy Code</button>
+        </div>
+
+        <div class="install-card">
+          <h3>🎨 CSS Requirements</h3>
+          <p>Basic CSS styles required:</p>
+          <div class="code-block">.my-tabs {
+  display: flex;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.my-tabs::-webkit-scrollbar {
+  display: none;
+}</div>
+          <button class="copy-btn" onclick="copyToClipboard('.my-tabs {\n  display: flex;\n  overflow-x: scroll;\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n}\n\n.my-tabs::-webkit-scrollbar {\n  display: none;\n}')">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <h2 class="section-title">Live Demo</h2>
+
+      <div class="demo-container">
+        <h3 class="demo-title">Basic Drag Scrolling</h3>
+        <p class="demo-description">Use mouse drag or touch swipe to browse tabs</p>
+        <ul class="tabScroller demo-tabs-1">
+          <li class="scroller-item">
+            <button>Home</button>
+          </li>
+          <li class="scroller-item">
+            <button>Products</button>
+          </li>
+          <li class="scroller-item">
+            <button>Solutions</button>
+          </li>
+          <li class="scroller-item">
+            <button>Case Studies</button>
+          </li>
+          <li class="scroller-item">
+            <button>Support</button>
+          </li>
+          <li class="scroller-item">
+            <button>About Us</button>
+          </li>
+          <li class="scroller-item">
+            <button>Contact</button>
+          </li>
+          <li class="scroller-item">
+            <button>Partners</button>
+          </li>
+          <li class="scroller-item">
+            <button>News</button>
+          </li>
+          <li class="scroller-item">
+            <button>Careers</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="demo-container">
+        <h3 class="demo-title">Click Switching + Auto Scroll</h3>
+        <p class="demo-description">Click tabs to switch active state and auto-scroll to position</p>
+        <ul class="tabScroller demo-tabs-2">
+          <li class="scroller-item scroller-item-active">
+            <button>JavaScript</button>
+          </li>
+          <li class="scroller-item">
+            <button>TypeScript</button>
+          </li>
+          <li class="scroller-item">
+            <button>React</button>
+          </li>
+          <li class="scroller-item">
+            <button>Vue.js</button>
+          </li>
+          <li class="scroller-item">
+            <button>Angular</button>
+          </li>
+          <li class="scroller-item">
+            <button>Svelte</button>
+          </li>
+          <li class="scroller-item">
+            <button>Node.js</button>
+          </li>
+          <li class="scroller-item">
+            <button>Express.js</button>
+          </li>
+          <li class="scroller-item">
+            <button>Webpack</button>
+          </li>
+          <li class="scroller-item">
+            <button>Vite</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="demo-container">
+        <h3 class="demo-title">Responsive Breakpoints</h3>
+        <p class="demo-description">Auto-adjust spacing and behavior based on screen size (try resizing browser window)</p>
+        <ul class="tabScroller demo-tabs-3">
+          <li class="scroller-item scroller-item-active">
+            <button>Design</button>
+          </li>
+          <li class="scroller-item">
+            <button>Development</button>
+          </li>
+          <li class="scroller-item">
+            <button>Testing</button>
+          </li>
+          <li class="scroller-item">
+            <button>Deployment</button>
+          </li>
+          <li class="scroller-item">
+            <button>Monitoring</button>
+          </li>
+          <li class="scroller-item">
+            <button>Maintenance</button>
+          </li>
+          <li class="scroller-item">
+            <button>Optimization</button>
+          </li>
+          <li class="scroller-item">
+            <button>Documentation</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Support Author</h3>
+          <p>If this tool helps you, please consider supporting the author!</p>
+          <a href="https://www.buymeacoffee.com/KenKyou" target="_blank" rel="noreferrer noopener" style="display: inline-block; margin-top: 10px;">
+            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px;">
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 tabScroller. Created by <a href="https://github.com/KennKyou" target="_blank" style="color: #60a5fa;">KennKyou</a>. MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { tabScroller } from './src/tabScroller.js';
+
+    // Initialize demo instances
+    const demo1 = new tabScroller('.demo-tabs-1', {
+      spaceBetween: 15
+    });
+
+    const demo2 = new tabScroller('.demo-tabs-2', {
+      spaceBetween: 15,
+      clickToActive: true,
+      clickToScroll: true
+    });
+
+    const demo3 = new tabScroller('.demo-tabs-3', {
+      spaceBetween: 10,
+      clickToActive: true,
+      clickToScroll: true,
+      breakpoints: {
+        768: {
+          spaceBetween: 20,
+          clickToActive: true
+        },
+        1024: {
+          spaceBetween: 30,
+          clickToActive: true
         }
-      })
+      }
+    });
 
-      // 新增：事件監聽示範
-      const scroller6 = new tabScroller('.tabScroller6', {
-        spaceBetween: 20,
-        clickToActive: true,
-        clickToScroll: true
-      })
+    // Copy to clipboard function
+    window.copyToClipboard = function(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        // Show feedback
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copied';
+        btn.style.background = '#10b981';
 
-      // 事件監聽器
-      const logContent = document.getElementById('log-content')
-      const eventContainer = document.querySelector('.tabScroller6')
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '#2563eb';
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed:', err);
+      });
+    };
 
-      eventContainer.addEventListener('tabScrollerActiveChange', (e) => {
-        const message = `✅ Active Change: 切換到第 ${e.detail.activeIndex + 1} 項 "${e.detail.activeItem.textContent}"`
-        console.log(message, e.detail)
-        logContent.innerHTML = message + '<br>' + logContent.innerHTML
-      })
-
-      eventContainer.addEventListener('tabScrollerSlideChange', (e) => {
-        const message = `🎯 Slide Change: 滑動到第 ${e.detail.targetIndex + 1} 項 (scrollLeft: ${e.detail.scrollLeft}px)`
-        console.log(message, e.detail)
-        logContent.innerHTML = message + '<br>' + logContent.innerHTML
-      })
-
-      // 新增：動態控制示範
-      let scroller7 = new tabScroller('.tabScroller7', {
-        spaceBetween: 15,
-        clickToActive: true,
-        clickToScroll: true
-      })
-
-      const destroyBtn = document.getElementById('destroy-btn')
-      const recreateBtn = document.getElementById('recreate-btn')
-      const status = document.getElementById('status')
-
-      destroyBtn.addEventListener('click', () => {
-        if (scroller7) {
-          scroller7.destroy()
-          scroller7 = null
-          destroyBtn.disabled = true
-          recreateBtn.disabled = false
-          status.textContent = '狀態: 已銷毀'
-          status.style.color = '#dc3545'
-          console.log('✅ tabScroller 實例已銷毀')
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
-      })
+      });
+    });
 
-      recreateBtn.addEventListener('click', () => {
-        if (!scroller7) {
-          scroller7 = new tabScroller('.tabScroller7', {
-            spaceBetween: 15,
-            clickToActive: true,
-            clickToScroll: true
-          })
-          destroyBtn.disabled = false
-          recreateBtn.disabled = true
-          status.textContent = '狀態: 已重新初始化'
-          status.style.color = '#28a745'
-          console.log('✅ tabScroller 實例已重新創建')
-        }
-      })
-
-      // 新增：錯誤處理示範
-      const errorContent = document.getElementById('error-content')
-      const testInvalidBtn = document.getElementById('test-invalid-selector')
-      const testEmptyBtn = document.getElementById('test-empty-container')
-
-      testInvalidBtn.addEventListener('click', () => {
-        try {
-          new tabScroller('.non-existent-selector', {
-            spaceBetween: 15
-          })
-        } catch (error) {
-          const message = `❌ 錯誤: ${error.message}`
-          console.error(message)
-          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
-        }
-      })
-
-      testEmptyBtn.addEventListener('click', () => {
-        // 創建一個空的測試容器
-        const emptyContainer = document.createElement('div')
-        emptyContainer.className = 'empty-test-container'
-        document.body.appendChild(emptyContainer)
-
-        try {
-          new tabScroller('.empty-test-container', {
-            spaceBetween: 15
-          })
-          const message = `⚠️ 警告: 已創建空容器實例，檢查控制台查看警告訊息`
-          console.warn(message)
-          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
-        } catch (error) {
-          const message = `❌ 錯誤: ${error.message}`
-          console.error(message)
-          errorContent.innerHTML = message + '<br>' + errorContent.innerHTML
-        } finally {
-          // 清理測試容器
-          document.body.removeChild(emptyContainer)
-        }
-      })
-
-      // 頁面載入提示
-      console.log('🚀 tabScroller 示範頁面已載入')
-      console.log('💡 提示：與標籤互動以查看事件日誌')
-    </script>
-  </body>
+    console.log('🚀 tabScroller official website loaded');
+  </script>
+</body>
 </html>

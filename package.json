@@ -1,6 +1,6 @@
 {
   "name": "tab-scroller",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A JavaScript library for creating scrollable tabs with drag-and-drop functionality",
   "main": "src/tabScroller.js",
   "type": "module",

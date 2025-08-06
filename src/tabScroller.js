@@ -3,7 +3,7 @@
  *
  * 用於創建可拖拽滾動的水平標籤列表，支援點擊切換、自動滾動、響應式斷點等功能。
  *
- * @version 2.0.1
+ * @version 2.0.2
  * @author KennKyou
  * @license MIT
  *
