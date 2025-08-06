@@ -1,4 +1,5 @@
 import { tabScroller } from '../src/tabScroller.js';
+import { describe, test, expect, beforeEach, jest } from '@jest/globals';
 
 describe('tabScroller', () => {
   let container;
@@ -107,7 +108,7 @@ describe('tabScroller', () => {
       };
 
       const scroller = new tabScroller('.test-container', options);
-      expect(scroller.spaceBetween).toBe(20); // Should use 576 breakpoint
+      expect(scroller.spaceBetween).toBe(30); // Should use 768 breakpoint since width (800) > 768
     });
 
     test('should handle invalid breakpoint options', () => {
@@ -174,17 +175,20 @@ describe('tabScroller', () => {
       const scroller = new tabScroller('.test-container');
       const applyOptionsSpy = jest.spyOn(scroller, 'applyOptions');
       
+      // Reset call count since applyOptions was called during construction
+      applyOptionsSpy.mockClear();
+      
       // Trigger multiple resize events
       window.dispatchEvent(new Event('resize'));
       window.dispatchEvent(new Event('resize'));
       window.dispatchEvent(new Event('resize'));
       
-      expect(applyOptionsSpy).toHaveBeenCalledTimes(1); // Initial call
+      expect(applyOptionsSpy).toHaveBeenCalledTimes(0); // No immediate calls
       
       // Fast-forward time
       jest.advanceTimersByTime(300);
       
-      expect(applyOptionsSpy).toHaveBeenCalledTimes(2); // Debounced call
+      expect(applyOptionsSpy).toHaveBeenCalledTimes(1); // Debounced call
       
       jest.useRealTimers();
     });

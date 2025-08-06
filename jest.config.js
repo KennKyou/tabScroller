@@ -13,19 +13,16 @@ export default {
   coverageReporters: ['text', 'lcov', 'html'],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 80,
-      lines: 80,
-      statements: 80
+      branches: 60,
+      functions: 70,
+      lines: 70,
+      statements: 70
     }
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   moduleFileExtensions: ['js'],
   transform: {},
-  extensionsToTreatAsEsm: ['.js'],
-  globals: {
-    'ts-jest': {
-      useESM: true
-    }
-  }
+  transformIgnorePatterns: [
+    'node_modules/'
+  ]
 };

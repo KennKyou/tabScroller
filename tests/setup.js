@@ -1,5 +1,5 @@
 // Jest setup file
-import 'jest-environment-jsdom';
+import { jest } from '@jest/globals';
 
 // Mock console methods for cleaner test output
 global.console = {
